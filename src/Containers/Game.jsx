@@ -1,45 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Board from '../Components/Board';
 
-export default class Game extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            history: [
-                {
-                    squares: Array(9).fill(null),
-                }
-            ],
-            xIsNext: true,
-            stepNumber: 0
-        };
-    };
+function Game() {
 
-    handleClick(i) {
-        const history = this.state.history.slice(0, this.state.stepNumber + 1 );
-        const current = history[this.state.stepNumber];
-        const squaresCopy = current.squares.slice();
-        if (this.calculateWinner(squaresCopy) || squaresCopy[i]) {
-            return
-        };
-        squaresCopy[i] = this.state.xIsNext ? 'X' : 'O'
-        this.setState({
-            history: history.concat([{
-                squares: squaresCopy
-            }]),
-            xIsNext: !this.state.xIsNext,
-            stepNumber: history.length
-        });
-    };
-
-    jumpTo(step) {
-        this.setState({
-            stepNumber: step,
-            xIsNext: (step % 2) === 0,
-        });
-    };
-
-    calculateWinner(squares) {
+    function calculateWinner(squares) {
         const lines = [
             [0, 1, 2],
             [3, 4, 5],
@@ -59,40 +24,41 @@ export default class Game extends Component {
         return null;
     };
 
-    render() {
-        const history = this.state.history;
-        const current = history[this.state.stepNumber];
-        const winner = this.calculateWinner(current.squares);
-        const moves = history.map((step, move) => {
-            const desc = move ? "Go to move # " + move : "Restart Game";
 
-            return (
-                <li key={move}>
-                    <button
-                        onClick={() =>
-                        this.jumpTo(move)
-                    }>
-                        {desc}
-                    </button>
-                </li>
-            );
-        });
+    function jumpTo(step) {
+        return;
+    };
 
-        let status = winner ? 'Winner: ' + winner : 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    const gameState = useSelector(state => state);
+    const history = gameState.history;
+    const moves = history.map((step, move) => {
+        const desc = move ? "Go to move # " + move : "Restart Game";
 
         return (
-            <div className='game'>
-                <div className='board-game'>
-                    <Board
-                        squares={current.squares}
-                        handleClick={(i) => this.handleClick(i)}
-                    />
-                </div>
-                <div className='game-info'>
-                    <div>{status}</div>
-                    <ol>{moves}</ol>
-                </div>
-            </div>
+            <li key={move}>
+                <button
+                    onClick={() =>
+                        jumpTo(move)
+                    }>
+                    {desc}
+                </button>
+            </li>
         );
-    };
+    });
+
+    let status = gameState.winner ? 'Winner: ' + gameState.winner : 'Next player: ' + (gameState.xIsNext ? 'X' : 'O');
+
+    return (
+        <div className='game'>
+            <div className='board-game'>
+                <Board />
+            </div>
+            <div className='game-info'>
+                <div>{status}</div>
+                <ol>{moves}</ol>
+            </div>
+        </div>
+    );
 };
+
+export default Game;

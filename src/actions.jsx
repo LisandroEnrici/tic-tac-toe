@@ -6,7 +6,7 @@ export const actionTypes = {
 };
 
 export const actions = {
-    move: (player, square) => {return { type: actionTypes.move, player, square }},
+    move: (square) => {return { type: actionTypes.move, square }},
     goToStep: (step) => {return { type: actionTypes.goToStep, step }},
-    gameOver: (winner) => {return { type: actionTypes.gameOver, winner}},
+    gameOver: () => {return { type: actionTypes.gameOver}},
 };
