@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Board from './Board.jsx';
 import StatusBar from '../Components/StatusBar.jsx';
+import MovesList from '../Components/MovesList.jsx';
 
 function GameContainer() {
 
@@ -25,29 +25,6 @@ function GameContainer() {
         return null;
     };
 
-    function jumpTo(step) {
-        return;
-    };
-
-    const gameState = useSelector(state => state);
-    const history = gameState.history;
-    const moves = history.map((step, move) => {
-        const desc = move ? "Go to move # " + move : "Restart Game";
-
-        return (
-            <li key={move}>
-                <button
-                    onClick={() =>
-                        jumpTo(move)
-                    }>
-                    {desc}
-                </button>
-            </li>
-        );
-    });
-
-    let status = gameState.winner ? 'Winner: ' + gameState.winner : 'Next player: ' + (gameState.xIsNext ? 'X' : 'O');
-
     return (
         <div className='game'>
             <div className='board-game'>
@@ -55,7 +32,7 @@ function GameContainer() {
             </div>
             <div className='game-info'>
                 <StatusBar />
-                <ol>{moves}</ol>
+                <MovesList />
             </div>
         </div>
     );
