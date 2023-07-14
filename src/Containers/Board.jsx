@@ -1,5 +1,5 @@
 import React from "react";
-import Square from "./Square";
+import Square from "../Components/Square";
 
 function Board() {
 
@@ -8,8 +8,6 @@ function Board() {
             index={i}
         />
     };
-
-
 
     return (
         <div>

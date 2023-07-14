@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Game from './Containers/Game';
+import GameContainer from './Containers/GameContainer';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducer'
@@ -11,7 +11,7 @@ const store = createStore(reducer);
 root.render(
     <React.StrictMode>
         <Provider store={store} >
-            <Game />
+            <GameContainer />
         </Provider>
     </React.StrictMode>
 );

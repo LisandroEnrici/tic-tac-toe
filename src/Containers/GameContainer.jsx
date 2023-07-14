@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Board from '../Components/Board';
+import Board from './Board.jsx';
+import StatusBar from '../Components/StatusBar.jsx';
 
-function Game() {
+function GameContainer() {
 
     function calculateWinner(squares) {
         const lines = [
@@ -23,7 +24,6 @@ function Game() {
         }
         return null;
     };
-
 
     function jumpTo(step) {
         return;
@@ -54,11 +54,11 @@ function Game() {
                 <Board />
             </div>
             <div className='game-info'>
-                <div>{status}</div>
+                <StatusBar />
                 <ol>{moves}</ol>
             </div>
         </div>
     );
 };
 
-export default Game;
+export default GameContainer;
