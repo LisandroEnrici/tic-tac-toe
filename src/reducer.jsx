@@ -2,11 +2,11 @@ import { actionTypes } from "./actions";
 
 const initialState = {
     stepNumber: 0,
-    winner: null,
     xIsNext: true,
     history: [
         {
-            squares: Array(9).fill(null)
+            squares: Array(9).fill(null),
+            winner: null
         }
     ]
 };
@@ -34,20 +34,20 @@ function calculateWinner(squares) {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.move:
-            const history = state.history.slice(0, state.stepNumber + 1 );
+            const history = state.history.slice(0, state.stepNumber + 1);
             const current = history[state.stepNumber];
             const squaresCopy = current.squares.slice();
-            
+
             squaresCopy[action.square] = state.xIsNext ? 'X' : 'O';
             const winner = calculateWinner(squaresCopy);
             return {
                 ...state,
                 history: history.concat([{
-                    squares: squaresCopy
+                    squares: squaresCopy,
+                    winner
                 }]),
                 xIsNext: !state.xIsNext,
                 stepNumber: history.length,
-                winner
             };
         case actionTypes.goToStep:
             return {

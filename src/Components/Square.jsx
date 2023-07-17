@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { actions } from '../actions';
 
 function Square({ index }) {
-    const value = useSelector(state => state.history[state.stepNumber].squares[index]);
-    const winner = useSelector(state => state.winner);
+    const currentState = useSelector(state => state.history[state.stepNumber]);
+    const value = currentState.squares[index]
+    const winner = currentState.winner;
     const dispatch = useDispatch();
 
     function handleClick(i) {
