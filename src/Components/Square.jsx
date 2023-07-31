@@ -9,9 +9,6 @@ function Square({ index }) {
     const dispatch = useDispatch();
 
     function handleClick(i) {
-        // check the square clicked doesn't have a value and the game is not over yet
-        if (value || winner) return;
-
         dispatch(actions.move(i));
     };
 
@@ -19,8 +16,14 @@ function Square({ index }) {
         <button
             className='square'
             onClick={() => handleClick(index)}
+            disabled={value || winner}
         >
-            {value}
+            <div style={{
+                position: 'absolute',
+                fontSize: '60px',
+            }}>
+                {value}
+            </div>
         </button>
     );
 };

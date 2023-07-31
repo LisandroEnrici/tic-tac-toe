@@ -10,7 +10,7 @@ function Board() {
     };
 
     return (
-        <div>
+        <>
             <div className='board-row'>
                 {renderSquare(0)}
                 {renderSquare(1)}
@@ -26,7 +26,7 @@ function Board() {
                 {renderSquare(7)}
                 {renderSquare(8)}
             </div>
-        </ div>
+        </>
     );
 };
 
