@@ -37,9 +37,10 @@ const reducer = (state = initialState, action) => {
             const history = state.history.slice(0, state.stepNumber + 1);
             const current = history[state.stepNumber];
             const squaresCopy = current.squares.slice();
+            const stepNumber = history.length;
 
             squaresCopy[action.square] = state.xIsNext ? 'X' : 'O';
-            const winner = calculateWinner(squaresCopy);
+            const winner = calculateWinner(squaresCopy) || (stepNumber === 9 ? 'Tie' : null);
             return {
                 ...state,
                 history: history.concat([{
@@ -47,7 +48,7 @@ const reducer = (state = initialState, action) => {
                     winner
                 }]),
                 xIsNext: !state.xIsNext,
-                stepNumber: history.length,
+                stepNumber: stepNumber,
             };
         case actionTypes.goToStep:
             return {
