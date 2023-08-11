@@ -8,14 +8,14 @@ This proyect was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Project State
 
-The stable release of the app (v2.0) is running on [Glass TicTacToe](https://master--glass-tictactoe.netlify.app).
+The stable release of the app (v2.1) is running on [Glass TicTacToe](https://master--glass-tictactoe.netlify.app).
 In this version I have implemented Redux, and made some great visual changes to make it look like glassmorphism.
 
 ---
 
 ## Future features
 
-The tie situation is pending, and I will add more animations and visual improvements.
+Animations and visual improvements will be added soon!
 
 ---
 
